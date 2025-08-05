@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Flowrex.Abstractions\Flowrex.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

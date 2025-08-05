@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Flowrex.Results\Flowrex.Results.csproj" />
+  </ItemGroup>
+
 </Project>

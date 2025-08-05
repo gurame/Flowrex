@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Flowrex.Core\Flowrex.Core.csproj" />
+    <ProjectReference Include="..\Flowrex.Persistence.InMemory\Flowrex.Persistence.InMemory.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Scrutor" Version="6.1.0" />
+  </ItemGroup>
+
 </Project>

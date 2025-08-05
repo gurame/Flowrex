@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Flowrex.Abstractions\Flowrex.Abstractions.csproj" />
+    <ProjectReference Include="..\Flowrex.Configuration\Flowrex.Configuration.csproj" />
+    <ProjectReference Include="..\Flowrex.Core\Flowrex.Core.csproj" />
+    <ProjectReference Include="..\Flowrex.Extensions\Flowrex.Extensions.csproj" />
+    <ProjectReference Include="..\Flowrex.Persistence.InMemory\Flowrex.Persistence.InMemory.csproj" />
+    <ProjectReference Include="..\Flowrex.Results\Flowrex.Results.csproj" />
+  </ItemGroup>
+
 </Project>
