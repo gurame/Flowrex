@@ -6,14 +6,14 @@ namespace Flowrex.Sandbox.Workflows.Onboarding;
 
 public class OnboardingWorkflow : IWorkflowDefinition
 {
-    public string Name { get; }
-
-    public void Build(IWorkflowBuilder builder)
+    public IWorkflow Build(IWorkflowBuilder builder)
     {
-        builder
+        var workflow = builder
             .AddStep<CreateUserStep>()
             .AddStep<AddUserToGroupsStep>()
                 .WithCompensation<DeleteUserStep>()
             .Build();
+        
+        return workflow;
     }
 }

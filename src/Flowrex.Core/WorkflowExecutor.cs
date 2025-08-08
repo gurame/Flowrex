@@ -60,4 +60,19 @@ public sealed class WorkflowExecutor(
 
         return WorkflowStatus.Completed;
     }
+    
+    public async Task<WorkflowStatus> ExecuteAsync<TWorkflowDefinition>(
+        CancellationToken cancellationToken = default)
+        where TWorkflowDefinition : IWorkflowDefinition
+    {
+        var workflowDefinition = serviceProvider.GetRequiredService<TWorkflowDefinition>();
+
+        var builder = new WorkflowBuilder(nameof(TWorkflowDefinition));
+        
+        var workflow = workflowDefinition.Build(builder);
+        
+        var context = new WorkflowContext(serviceProvider);
+
+        return await ExecuteAsync(workflow, context, cancellationToken);
+    }
 }

@@ -12,7 +12,6 @@ public sealed class FlowrexOptions
 
     public void UseWorkflowStore<T>() where T : class, IWorkflowStore
         => WorkflowStoreType = typeof(T);
-
     public void UseCompensationStrategy<T>() where T : class, ICompensationStrategy
         => CompensationStrategyType = typeof(T);
     internal Assembly? AssemblyToScan { get; set; }

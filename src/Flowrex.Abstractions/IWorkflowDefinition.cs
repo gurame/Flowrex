@@ -6,12 +6,7 @@ namespace Flowrex.Abstractions;
 public interface IWorkflowDefinition
 {
     /// <summary>
-    /// The name of the workflow. Used as a unique identifier.
-    /// </summary>
-    string Name { get; }
-
-    /// <summary>
     /// Registers the steps of the workflow using the builder.
     /// </summary>
-    void Build(IWorkflowBuilder builder);
+    IWorkflow Build(IWorkflowBuilder builder);
 }

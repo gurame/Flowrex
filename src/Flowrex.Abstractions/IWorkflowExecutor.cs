@@ -18,4 +18,8 @@ public interface IWorkflowExecutor
         IWorkflow workflow,
         IWorkflowContext context,
         CancellationToken cancellationToken);
+    
+    Task<WorkflowStatus> ExecuteAsync<TWorkflowDefinition>(
+        CancellationToken cancellationToken = default)
+        where TWorkflowDefinition : IWorkflowDefinition;  
 }
