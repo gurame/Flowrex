@@ -67,7 +67,7 @@ public sealed class WorkflowExecutor(
     {
         var workflowDefinition = serviceProvider.GetRequiredService<TWorkflowDefinition>();
 
-        var builder = new WorkflowBuilder(nameof(TWorkflowDefinition));
+        var builder = new WorkflowBuilder(workflowDefinition.GetType().Name);
         
         var workflow = workflowDefinition.Build(builder);
         

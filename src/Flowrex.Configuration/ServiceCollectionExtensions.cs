@@ -29,10 +29,4 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-    
-    public static FlowrexOptions RegisterWorkflowsFromAssemblyContaining<T>(this FlowrexOptions options)
-    {
-        options.AssemblyToScan = typeof(T).Assembly;
-        return options;
-    }
 }
