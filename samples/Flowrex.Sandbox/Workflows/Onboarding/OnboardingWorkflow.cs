@@ -13,7 +13,7 @@ public class OnboardingWorkflow : IWorkflowDefinition
             .AddStep<AddUserToGroupsStep>()
                 .WithCompensation<DeleteUserStep>()
             .Build();
-        
+
         return workflow;
     }
 }

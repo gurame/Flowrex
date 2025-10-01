@@ -8,9 +8,14 @@ namespace Flowrex.Abstractions;
 public interface IWorkflowExecution
 {
     Guid Id { get; }
+
     string WorkflowName { get; }
+
     WorkflowStatus Status { get; }
+
     DateTime StartedAtUtc { get; }
+
     DateTime? CompletedAtUtc { get; }
+
     IReadOnlyList<string> ExecutedSteps { get; }
 }

@@ -1,0 +1,39 @@
+#nullable enable
+Flowrex.Abstractions.ICompensableStep
+Flowrex.Abstractions.ICompensableStep.CompensateAsync(Flowrex.Abstractions.IWorkflowContext context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task
+Flowrex.Abstractions.ICompensationStrategy
+Flowrex.Abstractions.ICompensationStrategy.CompensateAsync(System.Collections.Generic.IEnumerable<Flowrex.Abstractions.ICompensableStep> executedSteps, Flowrex.Abstractions.IWorkflowContext context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task
+Flowrex.Abstractions.IStepBuilder
+Flowrex.Abstractions.IStepBuilder.AddStep<TStep>() -> Flowrex.Abstractions.IStepBuilder where TStep : class, Flowrex.Abstractions.IWorkflowStep
+Flowrex.Abstractions.IStepBuilder.Build() -> Flowrex.Abstractions.WorkflowStepDefinition
+Flowrex.Abstractions.IStepBuilder.WithCompensation<TCompensation>() -> Flowrex.Abstractions.IStepBuilder where TCompensation : class, Flowrex.Abstractions.ICompensableStep
+Flowrex.Abstractions.IWorkflow
+Flowrex.Abstractions.IWorkflow.Name.get -> string
+Flowrex.Abstractions.IWorkflow.Steps.get -> System.Collections.Generic.IReadOnlyList<Flowrex.Abstractions.WorkflowStepDefinition>
+Flowrex.Abstractions.IWorkflowBuilder
+Flowrex.Abstractions.IWorkflowBuilder.AddStep<TStep>() -> Flowrex.Abstractions.IStepBuilder where TStep : class, Flowrex.Abstractions.IWorkflowStep
+Flowrex.Abstractions.IWorkflowContext
+Flowrex.Abstractions.IWorkflowContext.ExecutionId.get -> System.Guid
+Flowrex.Abstractions.IWorkflowContext.GetOutput<T>(string key) -> T
+Flowrex.Abstractions.IWorkflowContext.GetService<TService>() -> TService
+Flowrex.Abstractions.IWorkflowContext.SetOutput(string key, object value) -> void
+Flowrex.Abstractions.IWorkflowDefinition
+Flowrex.Abstractions.IWorkflowDefinition.Build(Flowrex.Abstractions.IWorkflowBuilder builder) -> Flowrex.Abstractions.IWorkflow
+Flowrex.Abstractions.IWorkflowExecution
+Flowrex.Abstractions.IWorkflowExecution.CompletedAtUtc.get -> System.DateTimeOffset?
+Flowrex.Abstractions.IWorkflowExecution.ExecutedSteps.get -> System.Collections.Generic.IReadOnlyList<object>
+Flowrex.Abstractions.IWorkflowExecution.Id.get -> System.Guid
+Flowrex.Abstractions.IWorkflowExecution.StartedAtUtc.get -> System.DateTimeOffset
+Flowrex.Abstractions.IWorkflowExecution.Status.get -> Flowrex.Results.WorkflowStatus
+Flowrex.Abstractions.IWorkflowExecution.WorkflowName.get -> string
+Flowrex.Abstractions.IWorkflowExecutor
+Flowrex.Abstractions.IWorkflowExecutor.ExecuteAsync(Flowrex.Abstractions.IWorkflow workflow, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Flowrex.Abstractions.IWorkflowExecution>
+Flowrex.Abstractions.IWorkflowExecutor.ExecuteAsync<TWorkflowDefinition>(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Flowrex.Abstractions.IWorkflowExecution> where TWorkflowDefinition : class, Flowrex.Abstractions.IWorkflowDefinition, new()
+Flowrex.Abstractions.IWorkflowStep
+Flowrex.Abstractions.IWorkflowStep.ExecuteAsync(Flowrex.Abstractions.IWorkflowContext context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task
+Flowrex.Abstractions.IWorkflowStore
+Flowrex.Abstractions.IWorkflowStore.GetExecutionAsync(System.Guid executionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Flowrex.Abstractions.IWorkflowExecution?>
+Flowrex.Abstractions.IWorkflowStore.SaveExecutionAsync(Flowrex.Abstractions.IWorkflowExecution execution, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task
+Flowrex.Abstractions.WorkflowStepDefinition
+Flowrex.Abstractions.WorkflowStepDefinition.CompensationStepType.get -> System.Type?
+Flowrex.Abstractions.WorkflowStepDefinition.StepType.get -> System.Type

@@ -18,7 +18,7 @@ public enum WorkflowStatus
     /// <summary>
     /// Workflow completed successfully.
     /// </summary>
-    Completed = 2,
+    Succeeded = 2,
 
     /// <summary>
     /// Workflow failed.
@@ -29,9 +29,9 @@ public enum WorkflowStatus
     /// Workflow was rolled back via compensation.
     /// </summary>
     Compensated = 4,
-    
+
     /// <summary>
     /// Workflow was canceled before completion.
     /// </summary>
-    Canceled = 5
+    Canceled = 5,
 }

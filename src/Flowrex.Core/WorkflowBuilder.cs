@@ -4,29 +4,35 @@ namespace Flowrex.Core;
 
 public sealed class WorkflowBuilder(string workflowName) : IWorkflowBuilder, IStepBuilder
 {
-    private readonly List<WorkflowStepDefinition> _steps = [];
+    private readonly List<WorkflowStepDefinition> steps = [];
 
-    public IStepBuilder AddStep<TStep>() where TStep : class, IWorkflowStep
+    public IStepBuilder AddStep<TStep>()
+        where TStep : class, IWorkflowStep
     {
-        _steps.Add(new WorkflowStepDefinition(typeof(TStep)));
+        steps.Add(new WorkflowStepDefinition(typeof(TStep)));
         return this;
     }
 
-    public IStepBuilder WithCompensation<TCompensation>() where TCompensation : class, ICompensableStep
+    public IStepBuilder WithCompensation<TCompensation>()
+        where TCompensation : class, ICompensableStep
     {
-        if (_steps.Count == 0)
+        if (steps.Count == 0)
+        {
             throw new InvalidOperationException("No step to attach compensation to.");
+        }
 
-        var last = _steps[^1];
-        _steps[^1] = new WorkflowStepDefinition(last.StepType, typeof(TCompensation));
+        var last = steps[^1];
+        steps[^1] = new WorkflowStepDefinition(last.StepType, typeof(TCompensation));
         return this;
     }
 
     public IWorkflow Build()
     {
-        if (_steps.Count == 0)
+        if (steps.Count == 0)
+        {
             throw new InvalidOperationException("Cannot build a workflow with no steps.");
+        }
 
-        return new Workflow(workflowName, _steps);
+        return new Workflow(workflowName, steps);
     }
 }

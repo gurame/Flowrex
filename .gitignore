@@ -422,3 +422,10 @@ FodyWeavers.xsd
 
 # macOS specific files
 .DS_Store
+# Node.js / npm
+package-lock.json
+.npm
+.eslintcache
+
+# Husky
+.husky/_

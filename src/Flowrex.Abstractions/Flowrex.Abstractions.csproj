@@ -4,6 +4,21 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    
+    <!-- 
+      PublicAPI Analyzer temporarily disabled during early development.
+      
+      Why: The API is still evolving and changing frequently.
+      When to enable: Once the API design is stable (v1.0.0-beta).
+      
+      To re-enable: Remove this NoWarn and generate PublicAPI.txt files:
+      1. Build the project to see RS0016 errors
+      2. Create proper PublicAPI.Unshipped.txt with exact signatures
+      3. Before each release, move Unshipped -> Shipped
+      
+      See: https://github.com/dotnet/roslyn-analyzers/blob/main/src/PublicApiAnalyzers/PublicApiAnalyzers.Help.md
+    -->
+    <NoWarn>$(NoWarn);RS0016;RS0017;RS0027;RS0036</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

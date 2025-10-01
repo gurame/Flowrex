@@ -8,5 +8,6 @@ public interface IWorkflowBuilder
     /// <summary>
     /// Adds the first step in the workflow.
     /// </summary>
-    IStepBuilder AddStep<TStep>() where TStep : class, IWorkflowStep;
+    IStepBuilder AddStep<TStep>()
+        where TStep : class, IWorkflowStep;
 }

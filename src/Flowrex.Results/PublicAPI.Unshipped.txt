@@ -1,0 +1,15 @@
+#nullable enable
+Flowrex.Results.StepResult
+Flowrex.Results.StepResult.Error.get -> string?
+Flowrex.Results.StepResult.IsFailure.get -> bool
+Flowrex.Results.StepResult.IsSuccess.get -> bool
+Flowrex.Results.StepResult.Output.get -> object?
+Flowrex.Results.WorkflowStatus
+Flowrex.Results.WorkflowStatus.Canceled = 5 -> Flowrex.Results.WorkflowStatus
+Flowrex.Results.WorkflowStatus.Compensated = 4 -> Flowrex.Results.WorkflowStatus
+Flowrex.Results.WorkflowStatus.Completed = 2 -> Flowrex.Results.WorkflowStatus
+Flowrex.Results.WorkflowStatus.Failed = 3 -> Flowrex.Results.WorkflowStatus
+Flowrex.Results.WorkflowStatus.Pending = 0 -> Flowrex.Results.WorkflowStatus
+Flowrex.Results.WorkflowStatus.Running = 1 -> Flowrex.Results.WorkflowStatus
+static Flowrex.Results.StepResult.Failure(string! error) -> Flowrex.Results.StepResult!
+static Flowrex.Results.StepResult.Success(object? output = null) -> Flowrex.Results.StepResult!

@@ -15,7 +15,8 @@ public interface IWorkflowContext
     /// </summary>
     /// <typeparam name="TService">The type of the service to retrieve.</typeparam>
     /// <returns>An instance of the requested service.</returns>
-    TService GetService<TService>() where TService : notnull;
+    TService GetService<TService>()
+        where TService : notnull;
 
     /// <summary>
     /// Sets the output for the currently executing step.

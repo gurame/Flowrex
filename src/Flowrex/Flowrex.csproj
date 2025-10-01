@@ -1,10 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    
+    <!-- NuGet Package Information -->
+    <IsPackable>true</IsPackable>
+    <PackageId>Flowrex</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Gustavo Rabanal</Authors>
+    <Description>A professional .NET workflow orchestration library for building robust, scalable workflow engines with saga pattern support.</Description>
+    <PackageTags>workflow;orchestration;saga;compensation;dotnet;csharp</PackageTags>
+    <PackageProjectUrl>https://github.com/gurame/Flowrex</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <!-- <None Include="../../icon.png" Pack="true" PackagePath="/" /> -->
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Flowrex.Abstractions\Flowrex.Abstractions.csproj" />

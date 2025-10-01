@@ -3,6 +3,7 @@ using Flowrex.Results;
 using Microsoft.Extensions.Logging;
 
 namespace Flowrex.Sandbox.Workflows.Onboarding.Compensations;
+
 public class DeleteUserStep(ILogger<DeleteUserStep> logger) : ICompensableStep
 {
     public async Task<StepResult> CompensateAsync(IWorkflowContext context, CancellationToken cancellationToken)

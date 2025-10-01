@@ -9,12 +9,14 @@ public interface IStepBuilder
     /// <summary>
     /// Associates a compensating step with the previously added step.
     /// </summary>
-    IStepBuilder WithCompensation<TCompensation>() where TCompensation : class, ICompensableStep;
+    IStepBuilder WithCompensation<TCompensation>()
+        where TCompensation : class, ICompensableStep;
 
     /// <summary>
     /// Adds the next step in the workflow.
     /// </summary>
-    IStepBuilder AddStep<TStep>() where TStep : class, IWorkflowStep;
+    IStepBuilder AddStep<TStep>()
+        where TStep : class, IWorkflowStep;
 
     /// <summary>
     /// Finalizes the workflow.

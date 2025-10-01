@@ -1,4 +1,4 @@
-﻿using Flowrex.Abstractions;
+using Flowrex.Abstractions;
 using Flowrex.Results;
 
 namespace Flowrex.Core;
@@ -18,29 +18,48 @@ public sealed class WorkflowExecution : IWorkflowExecution
 
     public DateTime? CompletedAtUtc { get; private set; }
 
-    public IReadOnlyList<string> ExecutedSteps => _executedSteps.AsReadOnly();
-    private readonly List<string> _executedSteps = [];
+    public IReadOnlyList<string> ExecutedSteps => executedSteps.AsReadOnly();
 
-    private WorkflowExecution() { }
+    private readonly List<string> executedSteps = [];
+
     private WorkflowExecution(string workflowName)
     {
         WorkflowName = workflowName;
+        Status = WorkflowStatus.Running;
     }
 
     public void MarkStepExecuted(string stepName)
     {
-        if (!_executedSteps.Contains(stepName))
+        if (!executedSteps.Contains(stepName))
         {
-            _executedSteps.Add(stepName);
+            executedSteps.Add(stepName);
         }
     }
 
-    public void MarkCompleted(WorkflowStatus finalStatus)
+    public void Cancel()
+    {
+        MarkCompleted(WorkflowStatus.Canceled);
+    }
+
+    public void Fail()
+    {
+        MarkCompleted(WorkflowStatus.Failed);
+    }
+
+    public void Succeed()
+    {
+        MarkCompleted(WorkflowStatus.Succeeded);
+    }
+
+    private void MarkCompleted(WorkflowStatus finalStatus)
     {
         Status = finalStatus;
         CompletedAtUtc = DateTime.UtcNow;
     }
 
     public static WorkflowExecution StartNew(string workflowName)
-        => new(workflowName);
+    {
+        var execution = new WorkflowExecution(workflowName);
+        return execution;
+    }
 }

@@ -3,6 +3,7 @@ using Flowrex.Results;
 using Microsoft.Extensions.Logging;
 
 namespace Flowrex.Sandbox.Workflows.Onboarding.Steps;
+
 public class CreateUserStep(ILogger<CreateUserStep> logger) : IWorkflowStep
 {
     public async Task<StepResult> ExecuteAsync(IWorkflowContext context, CancellationToken cancellationToken)
