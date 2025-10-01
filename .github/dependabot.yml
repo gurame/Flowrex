@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
     reviewers:
       - "gurame/maintainers"
     labels:
@@ -15,5 +19,9 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "ci"
+      prefix-development: "ci"
+      include: "scope"
     labels:
       - "ci"

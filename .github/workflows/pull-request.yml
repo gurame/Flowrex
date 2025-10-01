@@ -49,6 +49,8 @@ jobs:
   conventional-commits:
     name: Conventional Commit (PR Title)
     runs-on: ubuntu-latest
+    # Skip this check for Dependabot PRs since Dependabot uses conventional commits automatically
+    if: github.actor != 'dependabot[bot]'
     permissions:
       pull-requests: write
       contents: read
