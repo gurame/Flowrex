@@ -19,9 +19,9 @@ public sealed class DefaultCompensationStrategy(ILogger<DefaultCompensationStrat
         logger.LogWarning(
             "Starting compensation for workflow {WorkflowName}. Will attempt to compensate {StepCount} steps",
             workflow.Name, executedSteps.Count);
-        
+
         var compensationErrors = 0;
-        
+
         foreach (var stepDef in executedSteps.Reverse())
         {
             if (stepDef.CompensationStepType is null)
@@ -39,7 +39,7 @@ public sealed class DefaultCompensationStrategy(ILogger<DefaultCompensationStrat
                 logger.LogInformation(
                     "Executing compensation step {CompensationType} for step {StepType}",
                     stepDef.CompensationStepType.Name, stepDef.StepType.Name);
-                    
+
                 await compensator.CompensateAsync(context, cancellationToken);
 
                 logger.LogInformation(
@@ -52,11 +52,11 @@ public sealed class DefaultCompensationStrategy(ILogger<DefaultCompensationStrat
                 logger.LogError(ex,
                     "Compensation step {CompensationType} failed for step {StepType}. Continuing with remaining compensations",
                     stepDef.CompensationStepType.Name, stepDef.StepType.Name);
-                
+
                 // Compensation failures are logged but don't stop the compensation chain
             }
         }
-        
+
         if (compensationErrors > 0)
         {
             logger.LogWarning(

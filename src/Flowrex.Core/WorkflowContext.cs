@@ -68,17 +68,17 @@ public sealed class WorkflowContext(IServiceProvider serviceProvider) : IWorkflo
         {
             return default;
         }
-        
+
         if (value is null)
         {
             return default;
         }
-        
+
         if (value is T typedValue)
         {
             return typedValue;
         }
-        
+
         throw new InvalidCastException(
             $"Cannot cast output value for key '{key}' from type '{value.GetType().FullName}' to type '{typeof(T).FullName}'.");
     }

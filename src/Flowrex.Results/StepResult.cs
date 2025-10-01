@@ -12,19 +12,19 @@ public sealed class StepResult
     /// <param name="error">The error message if the step failed.</param>
     private StepResult(object? output, string? error)
     {
-        this.Output = output;
-        this.Error = error;
+        Output = output;
+        Error = error;
     }
 
     /// <summary>
     /// Gets a value indicating whether the step completed successfully.
     /// </summary>
-    public bool IsSuccess => this.Error is null;
+    public bool IsSuccess => Error is null;
 
     /// <summary>
     /// Gets a value indicating whether the step failed.
     /// </summary>
-    public bool IsFailure => !this.IsSuccess;
+    public bool IsFailure => !IsSuccess;
 
     /// <summary>
     /// Gets optional output of the step. May be null.

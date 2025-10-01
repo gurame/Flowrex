@@ -19,6 +19,10 @@
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="AutoFixture" />
     <PackageReference Include="Testcontainers" />
+    
+    <!-- Fix transitive vulnerabilities -->
+    <PackageReference Include="System.Net.Http" />
+    <PackageReference Include="System.Text.RegularExpressions" />
   </ItemGroup>
 
   <ItemGroup>

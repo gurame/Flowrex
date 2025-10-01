@@ -17,7 +17,7 @@ public sealed class Workflow : IWorkflow
             throw new ArgumentException("Workflow name cannot be null or empty.", nameof(name));
         }
 
-        ArgumentNullException.ThrowIfNull(steps);  
+        ArgumentNullException.ThrowIfNull(steps);
         if (steps.Count == 0)
         {
             throw new ArgumentException("Workflow must have at least one step.", nameof(steps));

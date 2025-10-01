@@ -12,13 +12,13 @@ public sealed class InMemoryWorkflowStore : IWorkflowStore
 
     public Task SaveExecutionAsync(IWorkflowExecution execution, CancellationToken cancellationToken)
     {
-        this.store[execution.Id] = execution;
+        store[execution.Id] = execution;
         return Task.CompletedTask;
     }
 
     public Task<IWorkflowExecution?> GetExecutionAsync(Guid executionId, CancellationToken cancellationToken)
     {
-        this.store.TryGetValue(executionId, out var execution);
+        store.TryGetValue(executionId, out var execution);
         return Task.FromResult(execution);
     }
 }

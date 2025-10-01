@@ -13,7 +13,7 @@ public sealed class WorkflowExecutor(
     ILogger<WorkflowExecutor> logger)
     : IWorkflowExecutor
 {
-    
+
     public async Task<WorkflowStatus> ExecuteAsync(
         IWorkflow workflow,
         IWorkflowContext context,
@@ -22,13 +22,13 @@ public sealed class WorkflowExecutor(
         // Create a scope for this workflow execution
         using var scope = scopeFactory.CreateScope();
         var serviceProvider = scope.ServiceProvider;
-        
+
         List<WorkflowStepDefinition> executedSteps = [];
 
         using var activity = Activity.Current?.Source.StartActivity("Workflow.Execute");
         activity?.SetTag("workflow.name", workflow.Name);
         activity?.SetTag("execution.id", context.ExecutionId);
-        
+
         logger.LogInformation(
             "Starting workflow {WorkflowName} with execution ID {ExecutionId}",
             workflow.Name, context.ExecutionId);
@@ -43,10 +43,10 @@ public sealed class WorkflowExecutor(
             {
                 execution.Cancel();
                 await workflowStore.SaveExecutionAsync(execution, CancellationToken.None);
-                
-                 await compensationStrategy.CompensateAsync(
-                        workflow, executedSteps, context, serviceProvider, CancellationToken.None);
-    
+
+                await compensationStrategy.CompensateAsync(
+                       workflow, executedSteps, context, serviceProvider, CancellationToken.None);
+
                 return WorkflowStatus.Canceled;
             }
 
@@ -73,7 +73,7 @@ public sealed class WorkflowExecutor(
             {
                 logger.LogError(ex, "Error executing step {StepType} in workflow {WorkflowName}",
                     stepDef.StepType.Name, workflow.Name);
-                    
+
                 execution.Fail();
                 await workflowStore.SaveExecutionAsync(execution, cancellationToken);
 
@@ -96,7 +96,7 @@ public sealed class WorkflowExecutor(
     {
         using var scope = scopeFactory.CreateScope();
         var serviceProvider = scope.ServiceProvider;
-        
+
         var workflowDefinition = serviceProvider.GetRequiredService<TWorkflowDefinition>();
 
         var builder = new WorkflowBuilder(workflowDefinition.GetType().Name);

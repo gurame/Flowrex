@@ -23,12 +23,12 @@ public abstract class WorkflowStep : IWorkflowStep
     {
         try
         {
-            return await this.RunAsync(context, cancellationToken);
+            return await RunAsync(context, cancellationToken);
         }
         catch (Exception ex)
         {
             // You could optionally add logging hooks here.
-            return StepResult.Failure($"Exception in step {this.GetType().Name}: {ex.Message}");
+            return StepResult.Failure($"Exception in step {GetType().Name}: {ex.Message}");
         }
     }
 }
