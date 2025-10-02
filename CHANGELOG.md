@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/gurame/Flowrex/compare/v1.0.0...v1.0.1) (2025-10-02)
+
+
+### Bug Fixes
+
+* **nuget:** trust all NuGet.org signed packages for CI compatibility ([499917a](https://github.com/gurame/Flowrex/commit/499917a0768fdc9df3d2aae4027cbd6b4f8dfd4d))
+
 # 1.0.0 (2025-10-02)
 
 
