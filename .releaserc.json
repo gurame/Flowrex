@@ -7,7 +7,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "sed -i '' 's|<Version>.*</Version>|<Version>${nextRelease.version}</Version>|' src/Flowrex/Flowrex.csproj"
+        "prepareCmd": "sed -i 's|<Version>.*</Version>|<Version>${nextRelease.version}</Version>|' src/Flowrex/Flowrex.csproj"
       }
     ],
     [
