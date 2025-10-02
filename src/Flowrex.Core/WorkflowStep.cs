@@ -1,12 +1,13 @@
 using Flowrex.Abstractions;
 using Flowrex.Results;
+using Microsoft.Extensions.Logging;
 
 namespace Flowrex.Core;
 
 /// <summary>
 /// Abstract base class for workflow steps, providing common execution structure.
 /// </summary>
-public abstract class WorkflowStep : IWorkflowStep
+public abstract class WorkflowStep(ILogger<WorkflowStep> logger) : IWorkflowStep
 {
     /// <summary>
     /// Executes the step logic within the given context.
@@ -27,6 +28,8 @@ public abstract class WorkflowStep : IWorkflowStep
         }
         catch (Exception ex)
         {
+            // Add logging or error handling as needed.
+            logger.LogError(ex, "Error occurred while executing step {StepName}", GetType().Name);
             // You could optionally add logging hooks here.
             return StepResult.Failure($"Exception in step {GetType().Name}: {ex.Message}");
         }

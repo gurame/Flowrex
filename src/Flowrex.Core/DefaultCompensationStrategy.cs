@@ -52,8 +52,6 @@ public sealed class DefaultCompensationStrategy(ILogger<DefaultCompensationStrat
                 logger.LogError(ex,
                     "Compensation step {CompensationType} failed for step {StepType}. Continuing with remaining compensations",
                     stepDef.CompensationStepType.Name, stepDef.StepType.Name);
-
-                // Compensation failures are logged but don't stop the compensation chain
             }
         }
 
