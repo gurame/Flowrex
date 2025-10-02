@@ -41,7 +41,22 @@ jobs:
         id: semantic_dryrun
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --dry-run
+        run: |
+          # Run semantic-release in dry-run mode and capture output
+          OUTPUT=$(npx semantic-release --dry-run 2>&1)
+          echo "$OUTPUT"
+          
+          # Check if a release would be published
+          if echo "$OUTPUT" | grep -q "Published release" || echo "$OUTPUT" | grep -q "next release version is"; then
+            echo "new_release_published=true" >> $GITHUB_OUTPUT
+            # Extract version using sed (more portable)
+            VERSION=$(echo "$OUTPUT" | grep -E "(Published release|next release version is)" | sed -E 's/.*([0-9]+\.[0-9]+\.[0-9]+).*/\1/' | head -1)
+            echo "new_release_version=$VERSION" >> $GITHUB_OUTPUT
+            echo "✅ Would publish version: $VERSION"
+          else
+            echo "new_release_published=false" >> $GITHUB_OUTPUT
+            echo "❌ No release would be published"
+          fi
   
   # Step 2: Validate that everything builds and tests pass
   validate:
