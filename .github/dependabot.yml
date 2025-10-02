@@ -3,7 +3,9 @@ updates:
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+      day: "monday"
+      time: "03:00"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore"
@@ -17,7 +19,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
+      day: "monday"
+      time: "03:00"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "ci"
