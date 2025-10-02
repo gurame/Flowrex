@@ -14,7 +14,7 @@
     <PackageTags>workflow;orchestration;saga;compensation;dotnet;csharp</PackageTags>
     <PackageProjectUrl>https://github.com/gurame/Flowrex</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>icon.png</PackageIcon>
+    <!-- <PackageIcon>icon.png</PackageIcon> -->
   </PropertyGroup>
   
   <ItemGroup>
