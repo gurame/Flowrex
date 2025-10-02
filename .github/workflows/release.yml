@@ -10,9 +10,95 @@ permissions:
   issues: write    # For commenting on issues
   pull-requests: write  # For commenting on PRs
 
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
 jobs:
+  # Step 1: Determine next version (dry-run)
+  version:
+    name: Calculate Version
+    runs-on: ubuntu-latest
+    outputs:
+      new_release_published: ${{ steps.semantic_dryrun.outputs.new_release_published }}
+      new_release_version: ${{ steps.semantic_dryrun.outputs.new_release_version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Dry-run semantic-release to get next version
+        id: semantic_dryrun
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --dry-run
+  
+  # Step 2: Validate that everything builds and tests pass
+  validate:
+    name: Build & Test
+    needs: version
+    # Only run if there will be a new release
+    if: needs.version.outputs.new_release_published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      
+      - name: Restore
+        run: make restore
+      
+      - name: Build
+        run: make build
+      
+      - name: Test
+        run: make test
+      
+      - name: Pack
+        run: make package
+      
+      - name: Install SBOM tool
+        run: dotnet tool install --global Microsoft.Sbom.DotNetTool || true
+      
+      - name: Generate SBOM
+        run: |
+          mkdir -p artifacts/sbom
+          sbom-tool generate -b artifacts -bc . -pn Flowrex -pv ${{ needs.version.outputs.new_release_version }} -ps Gurame -nsb https://github.com/gurame/Flowrex -m artifacts/sbom
+      
+      - name: Upload NuGet packages (for later publish)
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts/*.nupkg
+          if-no-files-found: error
+          retention-days: 1
+      
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: artifacts/sbom
+          if-no-files-found: warn
+          retention-days: 1
+  
+  # Step 3: Only if validation passed, create the release
   release:
     name: Semantic Release
+    needs: [version, validate]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,6 +115,28 @@ jobs:
         run: npm ci
         
       - name: Release
+        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
+  
+  # Step 4: Publish to NuGet
+  publish:
+    name: Publish to NuGet
+    needs: [version, validate, release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download NuGet packages
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts
+      
+      - name: Publish to NuGet
+        run: |
+          dotnet nuget push artifacts/*.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
