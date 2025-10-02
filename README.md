@@ -165,3 +165,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 📖 [Documentation](https://github.com/gurame/Flowrex/wiki)
 - 🐛 [Issues](https://github.com/gurame/Flowrex/issues)
 - 💬 [Discussions](https://github.com/gurame/Flowrex/discussions)
+
+
+## Workflow Optimization Complete ✅
+
+This project uses an optimized CI/CD setup:
+- Pull Request validation only when needed
+- Security checks via cron (weekly) + PR validation
+- Dependabot monthly updates
+- Zero redundant workflow executions
+
+See commit history for optimization details.
