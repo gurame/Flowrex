@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/gurame/Flowrex/compare/v1.0.1...v1.0.2) (2025-10-02)
+
+
+### Bug Fixes
+
+* **ci:** fix release workflow conditions ([9fe854a](https://github.com/gurame/Flowrex/commit/9fe854a7bc45edec971d0c4ae2f911789ed06bf4))
+* **nuget:** disable signers validation ([bd67693](https://github.com/gurame/Flowrex/commit/bd676930a790430f9229ce03293d4861abbec746))
+* **workflowstep:** log exceptions ([bc8759f](https://github.com/gurame/Flowrex/commit/bc8759f3eedde80be1335f8e77c8c4f374e23c9c))
+
 ## [1.0.1](https://github.com/gurame/Flowrex/compare/v1.0.0...v1.0.1) (2025-10-02)
 
 
