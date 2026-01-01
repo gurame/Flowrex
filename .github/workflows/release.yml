@@ -95,7 +95,7 @@ jobs:
           sbom-tool generate -b artifacts -bc . -pn Flowrex -pv ${{ needs.version.outputs.new_release_version }} -ps Gurame -nsb https://github.com/gurame/Flowrex -m artifacts/sbom
       
       - name: Upload NuGet packages (for later publish)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: nuget-packages
           path: artifacts/*.nupkg
@@ -103,7 +103,7 @@ jobs:
           retention-days: 1
       
       - name: Upload SBOM
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: sbom
           path: artifacts/sbom
